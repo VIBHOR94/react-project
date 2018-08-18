@@ -12,14 +12,10 @@ class App extends Component {
     showPersons: false
   }
 
-  switchNameHandler = (newName) => {
-    this.setState({
-      persons: [
-        {name: newName, age: '28'},
-        {name: 'Manu', age: '29'},
-        {name: 'Stephanie', age: '27'}
-      ]
-    })
+  deletePersonHandler = (personIndex) => {
+    const persons = this.state.persons;
+    persons.splice(personIndex, 1);
+    this.setState({persons: persons})
   }
 
   toggleShowPersons = () => {
@@ -52,8 +48,8 @@ class App extends Component {
       persons = (
         <div>
           {
-            this.state.persons.map( person => {
-              return <Person name={person.name} age={person.age} />
+            this.state.persons.map( (person, index) => {
+              return <Person name={person.name} age={person.age} click={() => this.deletePersonHandler(index) }/>
             })
           }
         </div>
