@@ -24,14 +24,14 @@ class App extends Component {
     this.setState({showPersons: !doesShow});
   }
 
-  switchChangeHandler = (event) => {
-    this.setState({
-      persons: [
-        {name: 'Max', age: '28'},
-        {name: event.target.value, age: '29'},
-        {name: 'Stephanie', age: '27'}
-      ]
+  switchChangeHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(person => {
+      return person.id == id;
     })
+
+    const persons = [...this.state.persons];
+    persons[personIndex].name = event.target.value;
+    this.setState({persons: persons});
   }
 
   render() {
@@ -49,9 +49,9 @@ class App extends Component {
       persons = (
         <div>
           {
-            this.state.persons.map( (person, index) => {
+            this.state.persons.map((person, index) => {
               return <Person name={person.name} age={person.age}
-                click={() => this.deletePersonHandler(index)} key={person.id}/>
+                click={() => this.deletePersonHandler(index)} key={person.id} changed={(event) => this.switchChangeHandler(event, person.id)}/>
             })
           }
         </div>
