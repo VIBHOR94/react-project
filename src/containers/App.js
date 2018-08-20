@@ -1,17 +1,28 @@
 import React, { Component } from 'react';
 import classes from './App.css';
-import Person from '../components/Persons/Person/Person'
 import Persons from '../components/Persons/Persons'
 import Cockpit from '../components/Cockpit/Cockpit'
 
 class App extends Component {
-  state = {
-    persons: [
-      {id :'1', name: 'Max', age: '28'},
-      {id :'2', name: 'Manu', age: '29'},
-      {id :'3', name: 'Stephanie', age: '26'}
-    ],
-    showPersons: false
+  constructor(props){
+    super(props);
+    console.log('[App.js] Inside Constructor', props);
+    this.state = {
+      persons: [
+        {id :'1', name: 'Max', age: '28'},
+        {id :'2', name: 'Manu', age: '29'},
+        {id :'3', name: 'Stephanie', age: '26'}
+      ],
+      showPersons: false
+    }
+  }
+
+  componentWillMount(){
+    console.log('[App.js] Inside ComponentWillMount() ')
+  }
+
+  componentDidMount(){
+    console.log('[App.js] Inside ComponentDidMount() ')
   }
 
   deletePersonHandler = (personIndex) => {
@@ -37,6 +48,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('[App.js] inside render')
 
     let persons = null;
 
